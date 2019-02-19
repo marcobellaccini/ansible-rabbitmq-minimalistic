@@ -1,0 +1,46 @@
+---
+# tasks file for ansible-rabbitmq-minimalistic
+
+# install dirmngr (required by apt-key) and apt-transport-https
+- name: Install pre-requisites
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - dirmngr
+      - apt-transport-https
+
+- name: Add RabbitMQ apt key
+  apt_key:
+    url: https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc
+    id: 0A9AF2115F4687BD29803A206B73A36E6026DFCA
+    state: present
+
+- name: Add RabbitMQ Erlang apt repository
+  apt_repository:
+    repo: "deb https://dl.bintray.com/rabbitmq-erlang/debian {{ ansible_distribution_release }} erlang"
+    state: present
+
+- name: Add RabbitMQ apt repository
+  apt_repository:
+    repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
+    state: present
+
+- name: Install RabbitMQ
+  apt:
+    name: rabbitmq-server
+    state: present
+
+- name: Ensure RabbitMQ systemd service.d folder exists
+  file:
+    path: /etc/systemd/system/rabbitmq-server.service.d
+    state: directory
+  when: ansible_service_mgr == "systemd"
+
+- name: Setup systemd limits
+  template:
+    src: limits.conf.j2
+    dest: /etc/systemd/system/rabbitmq-server.service.d/limits.conf
+  notify: Systemd daemon reload and RabbitMQ service restart
+  when: ansible_service_mgr == "systemd"
