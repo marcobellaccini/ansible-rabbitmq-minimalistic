@@ -44,3 +44,10 @@
     dest: /etc/systemd/system/rabbitmq-server.service.d/limits.conf
   notify: Systemd daemon reload and RabbitMQ service restart
   when: ansible_service_mgr == "systemd"
+
+- name: Deploy rabbitmq.conf from template
+  template:
+    src: "{{ rabbitmq_conf_template }}"
+    dest: /etc/rabbitmq/rabbitmq.conf
+  notify: Restart RabbitMQ
+  when: rabbitmq_conf_template is defined

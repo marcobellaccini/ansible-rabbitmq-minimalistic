@@ -3,3 +3,5 @@
   hosts: all
   roles:
     - role: ansible-rabbitmq-minimalistic
+  vars:
+    rabbitmq_conf_template: "molecule/default/tests/fixtures/rabbitmq.conf.j2"

@@ -8,6 +8,12 @@ Written for Debian 9 (may work on other versions and distributions too - in case
 
 Role Variables
 --------------
+Apart from role defaults (for which you can refer to [this file](./defaults/main.yml)), you'll probably want to deploy your custom *rabbitmq.conf* file
+to the servers.
+You can make the role generate and deploy your *rabbitmq.conf* file by defining the *rabbitmq_conf_template* variable:
+
+    - rabbitmq_conf_template: "path_to_rabbitmq.conf.j2"
+
 
 [Role Defaults](./defaults/main.yml)
 
@@ -17,6 +23,8 @@ Example Playbook
     - hosts: servers
       roles:
          - ansible-rabbitmq-minimalistic
+      vars:
+        rabbitmq_conf_template: "my_rabbit_conf/rabbitmq.conf.j2"
 
 License
 -------

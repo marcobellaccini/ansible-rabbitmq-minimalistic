@@ -6,3 +6,8 @@
     name: rabbitmq-server
     state: restarted
     daemon_reload: yes  # this is to update OS limits
+
+- name: Restart RabbitMQ
+  service:
+    name: rabbitmq-server
+    state: restarted
