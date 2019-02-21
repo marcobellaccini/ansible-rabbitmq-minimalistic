@@ -49,8 +49,7 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - 9
-        - 10
+        - stretch
 
   galaxy_tags:
     - rabbitmq
