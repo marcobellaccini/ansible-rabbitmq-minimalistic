@@ -51,3 +51,14 @@
     dest: /etc/rabbitmq/rabbitmq.conf
   notify: Restart RabbitMQ
   when: rabbitmq_conf_template is defined
+
+- name: Copy erlang cookie
+  copy:
+    content: "{{ rabbitmq_erlang_cookie }}"
+    dest: /var/lib/rabbitmq/.erlang.cookie
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+  notify: Restart RabbitMQ
+  no_log: True
+  when: rabbitmq_erlang_cookie is defined

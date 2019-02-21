@@ -5,3 +5,4 @@
     - role: ansible-rabbitmq-minimalistic
   vars:
     rabbitmq_conf_template: "molecule/default/tests/fixtures/rabbitmq.conf.j2"
+    rabbitmq_erlang_cookie: "XXXXXXXXXXXXXXXXXXXX"

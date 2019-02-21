@@ -16,19 +16,33 @@ You can make the role generate and deploy your *rabbitmq.conf* file by defining 
 
     rabbitmq_conf_template: "path/to/rabbitmq.conf.j2"
 
+The path is relative to the playbook directory.
+
 In this way, you can also deploy a RabbitMQ cluster just by leveraging the
 [cluster_formation.classic_config.nodes](https://www.rabbitmq.com/configure.html#config-items) server variable in *rabbitmq.conf*.
+
+For example, you can use a *rabbitmq.conf.j2* template like this:
+
+    {%- for host in ansible_play_hosts_all %}
+    cluster_formation.classic_config.nodes.{{ loop.index }} = rabbit@{{ hostvars[host]['inventory_hostname'] }}
+    {% endfor -%}
+
+In order to enable clustering, you will have to setup the hosts with the same [erlang cookie](https://www.rabbitmq.com/clustering.html#erlang-cookie).
+
+For this, you can use the *rabbitmq_erlang_cookie* variable (please consider using
+[Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html) to encrypt the cookie).
 
 For other variables, see [Role Defaults](https://github.com/marcobellaccini/ansible-rabbitmq-minimalistic/blob/master/defaults/main.yml).
 
 Example Playbook
 ----------------
 
-    - hosts: servers
+    - hosts: msgservers
       roles:
          - ansible-rabbitmq-minimalistic
       vars:
         rabbitmq_conf_template: "my_rabbit_conf/rabbitmq.conf.j2"
+        rabbitmq_erlang_cookie: "XXXXXXXXXXXXXXXXXXXX" # this is just an example: please use Ansible Vault!
 
 License
 -------
