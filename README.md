@@ -16,6 +16,8 @@ You can make the role generate and deploy your *rabbitmq.conf* file by defining 
 
     rabbitmq_conf_template: "path/to/rabbitmq.conf.j2"
 
+In this way, you can also deploy a RabbitMQ cluster just by leveraging the
+[*cluster_formation.classic_config.nodes* server variable](https://www.rabbitmq.com/configure.html#config-items) in *rabbitmq.conf*.
 
 For other variables, see [Role Defaults](https://github.com/marcobellaccini/ansible-rabbitmq-minimalistic/blob/master/defaults/main.yml).
 
