@@ -23,9 +23,9 @@ In this way, you can also deploy a RabbitMQ cluster just by leveraging the
 
 For example, you can use a *rabbitmq.conf.j2* template like this:
 
-    {%- for host in ansible_play_hosts_all %}
+    {% for host in ansible_play_hosts_all %}
     cluster_formation.classic_config.nodes.{{ loop.index }} = rabbit@{{ hostvars[host]['inventory_hostname'] }}
-    {% endfor -%}
+    {% endfor %}
 
 In order to enable clustering, you will have to setup the hosts with the same [erlang cookie](https://www.rabbitmq.com/clustering.html#erlang-cookie).
 
