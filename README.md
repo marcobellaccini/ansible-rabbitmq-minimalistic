@@ -10,12 +10,13 @@ Role Variables
 --------------
 Apart from role defaults (for which you can refer to [this file](./defaults/main.yml)), you'll probably want to deploy your custom *rabbitmq.conf* file
 to the servers.
+
 You can make the role generate and deploy your *rabbitmq.conf* file by defining the *rabbitmq_conf_template* variable:
 
-    - rabbitmq_conf_template: "path_to_rabbitmq.conf.j2"
+    rabbitmq_conf_template: "path/to/rabbitmq.conf.j2"
 
 
-[Role Defaults](./defaults/main.yml)
+For other variables, see [Role Defaults](./defaults/main.yml).
 
 Example Playbook
 ----------------
