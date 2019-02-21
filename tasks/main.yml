@@ -27,10 +27,12 @@
     repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
     state: present
 
-- name: Install RabbitMQ
+- name: Install RabbitMQ - but avoid starting it immediately
   apt:
     name: rabbitmq-server
     state: present
+  environment:
+    RUNLEVEL: 1
 
 - name: Ensure RabbitMQ systemd service.d folder exists
   file:
