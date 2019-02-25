@@ -27,7 +27,7 @@
     repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
     state: present
 
-- name: Install RabbitMQ - but avoid starting it immediately
+- name: Install RabbitMQ - without starting it immediately
   apt:
     name: rabbitmq-server
     state: present
@@ -51,7 +51,11 @@
   template:
     src: "{{ rabbitmq_conf_template }}"
     dest: /etc/rabbitmq/rabbitmq.conf
-  notify: Restart RabbitMQ
+  notify:
+    - Restart RabbitMQ
+    - Stop app
+    - Reset node
+    - Start app
   when: rabbitmq_conf_template is defined
 
 - name: Copy erlang cookie

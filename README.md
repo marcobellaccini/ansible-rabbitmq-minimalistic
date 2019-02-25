@@ -29,6 +29,8 @@ For example, you can use a *rabbitmq.conf.j2* template like this:
 
 In order to enable clustering, you will have to setup the hosts with the same [erlang cookie](https://www.rabbitmq.com/clustering.html#erlang-cookie).
 
+When clustering, you will also have to set *serial: 1* in your playbook (otherwise nodes may experience problem when trying to form the cluster).
+
 For this, you can use the *rabbitmq_erlang_cookie* variable (please consider using
 [Ansible Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html) to encrypt the cookie).
 
@@ -38,6 +40,7 @@ Example Playbook
 ----------------
 
     - hosts: msgservers
+      serial: 1  # this is required only if you deploy a RabbitMQ cluster
       roles:
          - ansible-rabbitmq-minimalistic
       vars:

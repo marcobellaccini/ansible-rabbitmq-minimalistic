@@ -11,3 +11,12 @@
   service:
     name: rabbitmq-server
     state: restarted
+
+- name: Stop app
+  command: rabbitmqctl stop_app
+
+- name: Reset node
+  command: rabbitmqctl reset
+
+- name: Start app
+  command: rabbitmqctl start_app
