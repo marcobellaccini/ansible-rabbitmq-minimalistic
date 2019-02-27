@@ -53,6 +53,7 @@
     dest: /etc/rabbitmq/rabbitmq.conf
   notify:
     - Restart RabbitMQ
+    # the following is required in order for the cluster to form
     - Stop app
     - Reset node
     - Start app

@@ -6,8 +6,35 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: debian-9-instance
+  - name: debian-9-instance-stnd
     image: python:3-slim-stretch
+    groups:
+      - standaloneinst
+  - name: debian-9-instance-1
+    image: python:3-slim-stretch
+    hostname: debian-9-instance-1
+    networks:
+      - name: clusternet
+    network_mode: bridge
+    groups:
+      - group1
+  - name: debian-9-instance-2
+    image: python:3-slim-stretch
+    hostname: debian-9-instance-2
+    networks:
+      - name: clusternet
+    network_mode: bridge
+    groups:
+      - group1
+  - name: debian-9-instance-3
+    image: python:3-slim-stretch
+    hostname: debian-9-instance-3
+    networks:
+      - name: clusternet
+    network_mode: bridge
+    groups:
+      - group1
+
 provisioner:
   name: ansible
   lint:
