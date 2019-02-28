@@ -27,6 +27,11 @@
 - name: Converge
   hosts: group1
   tasks:
+    - name: Check erlang cookie
+      command: cat /var/lib/rabbitmq/.erlang.cookie
+      register: erlcookiecon
+      changed_when: false
+      failed_when: ("XXXXXXXXXXXXXXXXXXXX" not in erlcookiecon.stdout)
     - name: Get RabbitMQ cluster status
       command: rabbitmqctl cluster_status
       register: clusterstatus
