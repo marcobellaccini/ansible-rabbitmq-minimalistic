@@ -36,6 +36,9 @@ When clustering, you will also have to set *serial: 1* in your playbook (otherwi
 
 For other variables, see [Role Defaults](https://github.com/marcobellaccini/ansible-rabbitmq-minimalistic/blob/master/defaults/main.yml).
 
+This role aims to be minimalistic: in order to perform advanced configurations, you can use
+[Ansible RabbitMQ Modules](https://docs.ansible.com/ansible/latest/modules/list_of_messaging_modules.html).
+
 Example Playbook
 ----------------
 
