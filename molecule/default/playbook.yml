@@ -32,13 +32,10 @@
       register: erlcookiecon
       changed_when: false
       failed_when: ("XXXXXXXXXXXXXXXXXXXX" not in erlcookiecon.stdout)
-    - name: Get RabbitMQ cluster status
+    - name: Check RabbitMQ cluster status
       command: rabbitmqctl cluster_status
       register: clusterstatus
       changed_when: false
-    - name: Check if cluster nodes were correctly joined
-      fail:
-        msg: "Seems like not all the nodes joined the cluster"
-      when: ("debian-9-instance-1" not in clusterstatus.stdout) or
-            ("debian-9-instance-2" not in clusterstatus.stdout) or
-            ("debian-9-instance-3" not in clusterstatus.stdout)
+      failed_when: ("debian-9-instance-1" not in clusterstatus.stdout) or
+                   ("debian-9-instance-2" not in clusterstatus.stdout) or
+                   ("debian-9-instance-3" not in clusterstatus.stdout)
