@@ -33,6 +33,12 @@
     state: present
   environment:
     RUNLEVEL: 1
+  notify:
+    - Restart RabbitMQ
+    # the following is required in order for the cluster to form
+    - Stop app
+    - Reset node
+    - Start app
 
 - name: Ensure RabbitMQ systemd service.d folder exists
   file:
