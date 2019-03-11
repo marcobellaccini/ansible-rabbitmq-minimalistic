@@ -65,6 +65,14 @@
     - Start app
   when: rabbitmq_conf_template is defined
 
+- name: Deploy enabled_plugins file from template
+  template:
+    src: "{{ rabbitmq_enabled_plugins_template }}"
+    dest: /etc/rabbitmq/enabled_plugins
+  notify:
+    - Restart RabbitMQ
+  when: rabbitmq_enabled_plugins_template is defined
+
 - name: Copy erlang cookie
   copy:
     content: "{{ rabbitmq_erlang_cookie }}"

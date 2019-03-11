@@ -34,6 +34,13 @@ For this, you can use the *rabbitmq_erlang_cookie* variable (please consider usi
 
 When clustering, you will also have to set *serial: 1* in your playbook (otherwise nodes may experience problems when trying to form the cluster).
 
+You can also enable RabbitMQ plugins by simply specifying and deploying a
+RabbitMQ [enabled_plugins file](https://www.rabbitmq.com/plugins.html#ways-to-enable-plugins) from a template:
+
+    rabbitmq_enabled_plugins_template: "path/to/enabled_plugins.j2"
+
+Again, the path is relative to the playbook directory.
+
 For other variables, see [Role Defaults](https://github.com/marcobellaccini/ansible-rabbitmq-minimalistic/blob/master/defaults/main.yml).
 
 This role aims to be minimalistic: in order to perform advanced configurations, you can use
@@ -47,8 +54,9 @@ Example Playbook
       roles:
          - ansible-rabbitmq-minimalistic
       vars:
-        rabbitmq_conf_template: "my_rabbit_conf/rabbitmq.conf.j2"
-        rabbitmq_erlang_cookie: "XXXXXXXXXXXXXXXXXXXX" # this is just an example: please use Ansible Vault!
+        rabbitmq_conf_template: "my_rabbit_conf/rabbitmq.conf.j2"  # this is optional
+        rabbitmq_enabled_plugins_template: "my_rabbit_conf/enabled_plugins.j2"  # this is optional
+        rabbitmq_erlang_cookie: "XXXXXXXXXXXXXXXXXXXX"  # Required for clustering. NOTE: this is just an example: please use Ansible Vault!
 
 License
 -------
