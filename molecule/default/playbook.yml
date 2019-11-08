@@ -42,6 +42,6 @@
       command: rabbitmqctl cluster_status
       register: clusterstatus
       changed_when: false
-      failed_when: ("debian-9-instance-1" not in clusterstatus.stdout) or
-                   ("debian-9-instance-2" not in clusterstatus.stdout) or
-                   ("debian-9-instance-3" not in clusterstatus.stdout)
+      failed_when: ("debian-instance-1" not in clusterstatus.stdout) or
+                   ("debian-instance-2" not in clusterstatus.stdout) or
+                   ("debian-instance-3" not in clusterstatus.stdout)
