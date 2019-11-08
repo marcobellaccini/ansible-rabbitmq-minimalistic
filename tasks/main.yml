@@ -19,12 +19,14 @@
 
 - name: Add RabbitMQ Erlang apt repository
   apt_repository:
-    repo: "deb https://dl.bintray.com/rabbitmq-erlang/debian {{ ansible_distribution_release }} erlang"
+    # bionic repo is the correct one for buster
+    repo: "deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang"
     state: present
 
 - name: Add RabbitMQ apt repository
   apt_repository:
-    repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
+    # bionic repo is the correct one for buster
+    repo: "deb https://dl.bintray.com/rabbitmq/debian bionic main"
     state: present
 
 - name: Install RabbitMQ - without starting it immediately
