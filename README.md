@@ -4,7 +4,7 @@ ansible-rabbitmq-minimalistic
 
 Minimalistic, yet powerful and clustering-enabled RabbitMQ Ansible role.
 
-Written for Debian 9 (may work on other versions and distributions too - in case, please let me know).
+Written for Debian 10 (may work on other versions and distributions too - in case, please let me know).
 
 Role Variables
 --------------
